@@ -390,7 +390,7 @@ END subida_50pct;
 
 #### 11) Diseñar una aplicación que simule un listado de liquidación de los empleados según las siguientes especificaciones:
  - El listado tendrá el siguiente formato para cada empleado:
-**********************************************************************
+
 Liquidación del empleado:...................(1)
  Dpto:.................(2) 
 Oficio:...........(3)
@@ -400,7 +400,7 @@ Comp. Responsabil :.............(6)
 Comisión :.............(7)
 ------------
 Total :.............(8)
-**********************************************************************
+
 - Donde:
 1 ,2, 3 y 4 Corresponden al apellido, departamento, oficio y salario del empleado.
 5 Es el importe en concepto de trienios. Cada trienio son tres años completos desde la fecha de alta hasta la de emisión y supone 5000 Ptas.
