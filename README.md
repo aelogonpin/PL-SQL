@@ -398,8 +398,9 @@ Salario : ............(4)
 Trienios :.............(5)
 Comp. Responsabil :.............(6)
 Comisión :.............(7)
-------------
+
 Total :.............(8)
+------------
 
 - Donde:
 1 ,2, 3 y 4 Corresponden al apellido, departamento, oficio y salario del empleado.
