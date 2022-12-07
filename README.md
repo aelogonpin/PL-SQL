@@ -4,8 +4,11 @@ Todas las actividades de PL/SQL y posibles datos.
 
 
 
-PARTES DE ACTIVIDAD:
-1)  Desarrollar un procedimiento que visualice el apellido y la fecha de alta de todos los empleados ordenados por apellido.
+## PARTES DE ACTIVIDAD:
+
+
+
+## 1)  Desarrollar un procedimiento que visualice el apellido y la fecha de alta de todos los empleados ordenados por apellido.
 
 CREATE OR REPLACE PROCEDURE ejercicio_uno AS
 CURSOR c_emple IS
@@ -18,8 +21,11 @@ FETCH c_emple into v_apellido, v_fecha; WHILE c_emple%FOUND LOOP
 DBMS_OUTPUT.PUT_LINE( v_apellido||' * '||v_fecha); FETCH c_emple into v_apellido,v_fecha;
 END LOOP;
 CLOSE c_emple; END ejercicio_uno;
+
+
+
  
-2)  Codificar un procedimiento que muestre el nombre de cada departamento y el número de empleados que tiene.
+#### 2)  Codificar un procedimiento que muestre el nombre de cada departamento y el número de empleados que tiene.
  
 CREATE OR REPLACE PROCEDURE ver_emple_depart AS
 CURSOR c_emple IS
@@ -35,7 +41,7 @@ END ver_emple_depart;
 
 
 
-3)  Escribir un procedimiento que reciba una cadena y visualice el apellido y el número de empleado
+#### 3)  Escribir un procedimiento que reciba una cadena y visualice el apellido y el número de empleado
 de todos los empleados cuyo apellido contenga la cadena especificada. Al finalizar visualizar el número de empleados mostrados.
 
 CREATE OR REPLACE PROCEDURE ver_emple_apell( cadena VARCHAR2)
@@ -53,7 +59,7 @@ DBMS_OUTPUT.PUT_LINE('NUMERO DE EMPLEADOS: '
 || c_emple%ROWCOUNT); CLOSE c_emple;
 END ver_emple_apell;
  
-4)  Escribir un programa que visualice el apellido y el salario de los cinco empleados que tienen el salario más alto.
+#### 4)  Escribir un programa que visualice el apellido y el salario de los cinco empleados que tienen el salario más alto.
  Create or replace procedure ej3
 as
 cursor co_emp is
@@ -66,11 +72,13 @@ end loop;
 close co_emp;
 end ej3;
 
-exec ej3;
 
-2  .- Ejemplos de como como recorrer un cursor.
 
-5)  Codificar un programa que visualice los dos empleados que ganan menos de cada oficio. 
+
+
+## 2  .- Ejemplos de como como recorrer un cursor.
+
+#### 5)  Codificar un programa que visualice los dos empleados que ganan menos de cada oficio. 
 
  Create or replace procedure ej4
 as 
@@ -98,7 +106,9 @@ close c_emp;
 end ej4;
  
  
-6)  Escribir un programa que muestre, en formato similar a las rupturas de control o secuencia vistas en SQL*plus los siguientes datos:
+ 
+ 
+#### 6)  Escribir un programa que muestre, en formato similar a las rupturas de control o secuencia vistas en SQL*plus los siguientes datos:
 -  Para cada empleado: apellido y salario.
 -  Para cada departamento: Número de empleados y suma de los salarios del departamento.
 - Al final del listado: Número total de empleados y suma de todos los salarios. 
@@ -161,7 +171,7 @@ END listar_emple;
 
 
 
-7)  Desarrollar un procedimiento que permita insertar nuevos departamentos según las siguientes especificaciones:
+#### 7)  Desarrollar un procedimiento que permita insertar nuevos departamentos según las siguientes especificaciones:
 Se pasará al procedimiento el nombre del departamento y la localidad.
 El procedimiento insertará la fila nueva asignando como número de departamento la decena siguiente al número mayor de la tabla.
 Se incluirá gestión de posibles errores.
@@ -200,7 +210,7 @@ END insertar_depart;
 
 
 
-8)  Escribir un procedimiento que reciba todos los datos de un nuevo empleado procese la transacción de alta, gestionando posibles errores.
+#### 8)  Escribir un procedimiento que reciba todos los datos de un nuevo empleado procese la transacción de alta, gestionando posibles errores.
  
 CREATE OR REPLACE PROCEDURE alta_emp(
 num emple.emp_no%TYPE,
@@ -246,10 +256,10 @@ RAISE;
 END alta_emp;
 
  
-WHILE...FOUND...LOOP...
-3  .- Ejemplos como procedimientos con cursores y parámetros de entrada.
+## WHILE...FOUND...LOOP...
+## 3  .- Ejemplos como procedimientos con cursores y parámetros de entrada.
 
-9)  Codificar un procedimiento reciba como parámetros un numero de departamento, un importe y un porcentaje; y suba el salario a todos los empleados del departamento indicado en la llamada. La subida será el porcentaje o el importe indicado en la llamada (el que sea más beneficioso para el empleado en cada caso empleado).
+#### 9)  Codificar un procedimiento reciba como parámetros un numero de departamento, un importe y un porcentaje; y suba el salario a todos los empleados del departamento indicado en la llamada. La subida será el porcentaje o el importe indicado en la llamada (el que sea más beneficioso para el empleado en cada caso empleado).
  
  CREATE OR REPLACE PROCEDURE subida_sal1(
 num_depar emple.dept_no%TYPE,
@@ -284,7 +294,7 @@ END subida_sal1;
 
  
  
-10)  Escribir un procedimiento que suba el sueldo de todos los empleados que ganen menos que el salario medio de su oficio. La subida será de el 50% de la diferencia entre el salario del empleado y la media de su oficio. Se deberá asegurar que la transacción no se quede a medias, y se gestionarán los posibles errores.
+#### 10)  Escribir un procedimiento que suba el sueldo de todos los empleados que ganen menos que el salario medio de su oficio. La subida será de el 50% de la diferencia entre el salario del empleado y la media de su oficio. Se deberá asegurar que la transacción no se quede a medias, y se gestionarán los posibles errores.
 CREATE OR REPLACE PROCEDURE subida_50pct
 AS
 CURSOR c_ofi_sal IS
@@ -336,7 +346,7 @@ RAISE;
 END subida_50pct;
 
 
-11) Diseñar una aplicación que simule un listado de liquidación de los empleados según las siguientes especificaciones:
+#### 11) Diseñar una aplicación que simule un listado de liquidación de los empleados según las siguientes especificaciones:
  - El listado tendrá el siguiente formato para cada empleado:
 **********************************************************************
 Liquidación del empleado:...................(1)
@@ -423,7 +433,7 @@ WHERE EMPLE.EMP_NO = DIREC.DIR(+)
 ORDER BY APELLIDO;
 
 
-12)  Crear la tabla T_liquidacion con las columnas apellido, departamento, oficio, salario, trienios, comp_responsabilidad, comisión y total; y modificar la aplicación anterior para que en lugar de realizar el listado directamente en pantalla, guarde los datos en la tabla. Se controlarán todas las posibles incidencias que puedan ocurrir durante el proceso.
+#### 12)  Crear la tabla T_liquidacion con las columnas apellido, departamento, oficio, salario, trienios, comp_responsabilidad, comisión y total; y modificar la aplicación anterior para que en lugar de realizar el listado directamente en pantalla, guarde los datos en la tabla. Se controlarán todas las posibles incidencias que puedan ocurrir durante el proceso.
 CREATE TABLE t_liquidacion (
 APELLIDO VARCHAR2(10),
 DEPARTAMENTO NUMBER(2),
@@ -484,8 +494,8 @@ END liquidar2;
 
  
  
-1.- Ejemplo de como crear un trigger.
-a) Construir un disparador de base de datos que permita auditar las operaciones de inserción o borrado de datos que se realicen en la tabla emple según las siguientes especificaciones:
+## 1.- Ejemplo de como crear un trigger.
+#### a) Construir un disparador de base de datos que permita auditar las operaciones de inserción o borrado de datos que se realicen en la tabla emple según las siguientes especificaciones:
 -  En primer lugar se creará desde SQL*Plus la tabla auditaremple con la columna col1 VARCHAR2(200).
 -  Cuando se produzca cualquier manipulación se insertará una fila en dicha tabla que contendrá:
 -  Fecha y hora
@@ -514,7 +524,7 @@ END IF;
 END;
 
  
-2.- Escribir un trigger de base de datos un que permita auditar las modificaciones en la tabla empleados insertado en la tabla auditaremple los siguientes datos:
+#### 2.- Escribir un trigger de base de datos un que permita auditar las modificaciones en la tabla empleados insertado en la tabla auditaremple los siguientes datos:
 -  Fecha y hora
 -  Número de empleado
 - Apellido
@@ -573,7 +583,7 @@ INSERT INTO AUDITAREMPLE VALUES(v_cad_inser);
 END;
 
  
-3.- Escribir un disparador de base de datos que haga fallar cualquier operación de modificación del apellido o del número de un empleado, o que suponga una subida de sueldo superior al 10%.
+#### 3.- Escribir un disparador de base de datos que haga fallar cualquier operación de modificación del apellido o del número de un empleado, o que suponga una subida de sueldo superior al 10%.
  CREATE OR REPLACE TRIGGER fallo_modif
 BEFORE UPDATE OF apellido, emp_no, salario
 ON emple
@@ -588,8 +598,8 @@ RAISE_APPLICATION_ERROR
 END IF;
 END;
 
-c) Ejemplos como crear un trigger a partir de una vista.
- 4.- Suponiendo que disponemos de la vista
+## c) Ejemplos como crear un trigger a partir de una vista.
+ #### 4.- Suponiendo que disponemos de la vista
 
 CREATE VIEW DEPARTAM AS
 SELECT DEPART.DEPT_NO, DNOMBRE, LOC, COUNT(EMP_NO) TOT_EMPLE
@@ -624,10 +634,10 @@ END;
  
  
  
-CREATE OR REPLACE PACKAGE...
-1.- Ejemplo de como crear un paquete.
+## CREATE OR REPLACE PACKAGE...
+## 1.- Ejemplo de como crear un paquete.
  
-6)  Escribir un paquete completo para gestionar los departamentos. El paquete se llamará gest_depart y deberá incluir, al menos, los siguientes subprogramas:
+#### 6)  Escribir un paquete completo para gestionar los departamentos. El paquete se llamará gest_depart y deberá incluir, al menos, los siguientes subprogramas:
 -  insertar_nuevo_depart: permite insertar un departamento nuevo. El procedimiento recibe el nombre y la localidad del nuevo departamento. Creará el nuevo departamento comprobando que el nombre no se duplique y le asignará como número de departamento la decena siguiente al último número de departamento utilizado.
 -  borrar_depart: permite borrar un departamento. El procedimiento recibirá dos números de departamento de los cuales el primero corresponde al departamento que queremos borrar y el segundo al departamento al que pasarán los empleados del departamento que se va eliminar. El procedimiento se encargará de realizar los cambios oportunos en los números de departamento de los empleados correspondientes.
 -  modificar_loc_depart: modifica la localidad del departamento. El procedimiento recibirá el número del departamento a modificar y la nueva localidad, y realizará el cambio solicitado.
@@ -782,55 +792,11 @@ DBMS_OUTPUT.PUT_LINE('Err departamento no encontrado');
 END cambiar_localidad;
 END gest_depart;
 
- 
- 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-CREATE OR REPLACE PACKAGE BODY....
-2  .- Ejemplo de como crear un paquete.
+## CREATE OR REPLACE PACKAGE BODY....
+## 2  .- Ejemplo de como crear un paquete.
  
 /****************** Cabecera del paquete *********************/
 CREATE OR REPLACE PACKAGE gest_emple AS
@@ -1074,11 +1040,11 @@ END gest_emple;
 
 
 
+  
+## CREATE OR REPLACE PACKAGE...
+## 3  .- Ejemplo de como crear un paquete.
  
-CREATE OR REPLACE PACKAGE...
-3  .- Ejemplo de como crear un paquete.
- 
-8)  Crear el procedimiento ejsqldin indicado al comienzo del epígrafe 5, y realizar con él distintas operaciones de definición de datos, observar los resultados y solucionar los problemas que puedan plantearse.
+#### 8)  Crear el procedimiento ejsqldin indicado al comienzo del epígrafe 5, y realizar con él distintas operaciones de definición de datos, observar los resultados y solucionar los problemas que puedan plantearse.
 CREATE OR REPLACE PROCEDURE ejsqldin
 (instruccion VARCHAR2)
 AS
@@ -1124,7 +1090,7 @@ C1 CHAR(1)
 COMENTARIO VARCHAR2(20)
 
  
-9.- Crear un procedimiento que permita consultar todos los datos de la tabla depart a partir de una condición que se indicará en la llamada al procedimiento.
+#### 9.- Crear un procedimiento que permita consultar todos los datos de la tabla depart a partir de una condición que se indicará en la llamada al procedimiento.
  
 CREATE OR REPLACE PROCEDURE consultar_depart
 (condicion VARCHAR2,
@@ -1172,13 +1138,7 @@ END consultar_depart;
 
 
 
-
-
-
-
-
-
-ERRORES:
+## ERRORES:
  
 DUP_VAL_ON_INDEX - Se produce cuando se intenta almacenar un valor ya existente en una columna que tiene restricción de índice único.
 NOT_LOGGED_ON - El programa efectuó una llamada a Oracle sin estar conectado.
@@ -1214,7 +1174,7 @@ OTHERS - Cualquier otro tipo de error que pueda producirse. Cuando se utiliza la
 
 
 
-Apartados de funcionamiento y otros datos importantes:
+## Apartados de funcionamiento y otros datos importantes:
 
 Para ver el código de un procedimiento almacenado podemos hacer uso de la orden SQL:
 SHOW CREATE PROCEDURE department_getList;
@@ -1222,7 +1182,17 @@ SHOW CREATE PROCEDURE department_getList;
 
 
 
-Examen PL/SQL:
+
+
+
+
+
+<br><br><br><br>
+
+## Examen PL/SQL:
 
 <img src="https://github.com/aelogonpin/PL-SQL/blob/main/Parte1.jpg">
+
+<br><br><br><br>
+
 <img src="https://github.com/aelogonpin/PL-SQL/blob/main/Parte2.jpg">
