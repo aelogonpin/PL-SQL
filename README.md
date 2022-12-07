@@ -20,7 +20,7 @@ OPEN c_emple;
 FETCH c_emple into v_apellido, v_fecha; WHILE c_emple%FOUND LOOP
 DBMS_OUTPUT.PUT_LINE( v_apellido||' * '||v_fecha); FETCH c_emple into v_apellido,v_fecha;
 END LOOP;
-CLOSE c_emple; END ejercicio_uno;
+CLOSE c_emple; END ejercicio_uno; 
 
 
 
