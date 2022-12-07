@@ -41,6 +41,8 @@ END ver_emple_depart;
 
 
 
+
+
 #### 3)  Escribir un procedimiento que reciba una cadena y visualice el apellido y el número de empleado
 de todos los empleados cuyo apellido contenga la cadena especificada. Al finalizar visualizar el número de empleados mostrados.
 
@@ -59,6 +61,9 @@ DBMS_OUTPUT.PUT_LINE('NUMERO DE EMPLEADOS: '
 || c_emple%ROWCOUNT); CLOSE c_emple;
 END ver_emple_apell;
  
+ 
+ 
+ 
 #### 4)  Escribir un programa que visualice el apellido y el salario de los cinco empleados que tienen el salario más alto.
  Create or replace procedure ej3
 as
@@ -71,6 +76,8 @@ i :=I+1;
 end loop;
 close co_emp;
 end ej3;
+
+
 
 
 
@@ -104,6 +111,8 @@ i:= i+1;
 end loop;
 close c_emp;
 end ej4;
+ 
+ 
  
  
  
@@ -171,6 +180,10 @@ END listar_emple;
 
 
 
+
+
+
+
 #### 7)  Desarrollar un procedimiento que permita insertar nuevos departamentos según las siguientes especificaciones:
 Se pasará al procedimiento el nombre del departamento y la localidad.
 El procedimiento insertará la fila nueva asignando como número de departamento la decena siguiente al número mayor de la tabla.
@@ -205,6 +218,9 @@ RAISE;
 WHEN OTHERS THEN
 RAISE_APPLICATION_ERROR(-20005,'Err. Operación cancelada’);
 END insertar_depart;
+
+
+
 
 
 
@@ -256,6 +272,13 @@ RAISE;
 END alta_emp;
 
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 ## WHILE...FOUND...LOOP...
 ## 3  .- Ejemplos como procedimientos con cursores y parámetros de entrada.
 
@@ -292,6 +315,10 @@ WHEN NO_DATA_FOUND THEN
 DBMS_OUTPUT.PUT_LINE('Err. ninguna fila actualizada');
 END subida_sal1;
 
+ 
+ 
+ 
+ 
  
  
 #### 10)  Escribir un procedimiento que suba el sueldo de todos los empleados que ganen menos que el salario medio de su oficio. La subida será de el 50% de la diferencia entre el salario del empleado y la media de su oficio. Se deberá asegurar que la transacción no se quede a medias, y se gestionarán los posibles errores.
@@ -344,6 +371,11 @@ WHEN OTHERS THEN
 ROLLBACK WORK;
 RAISE;
 END subida_50pct;
+
+
+
+
+
 
 
 #### 11) Diseñar una aplicación que simule un listado de liquidación de los empleados según las siguientes especificaciones:
@@ -433,6 +465,11 @@ WHERE EMPLE.EMP_NO = DIREC.DIR(+)
 ORDER BY APELLIDO;
 
 
+
+
+
+
+
 #### 12)  Crear la tabla T_liquidacion con las columnas apellido, departamento, oficio, salario, trienios, comp_responsabilidad, comisión y total; y modificar la aplicación anterior para que en lugar de realizar el listado directamente en pantalla, guarde los datos en la tabla. Se controlarán todas las posibles incidencias que puedan ocurrir durante el proceso.
 CREATE TABLE t_liquidacion (
 APELLIDO VARCHAR2(10),
@@ -494,6 +531,12 @@ END liquidar2;
 
  
  
+ 
+ 
+ 
+ 
+ 
+ 
 ## 1.- Ejemplo de como crear un trigger.
 #### a) Construir un disparador de base de datos que permita auditar las operaciones de inserción o borrado de datos que se realicen en la tabla emple según las siguientes especificaciones:
 -  En primer lugar se creará desde SQL*Plus la tabla auditaremple con la columna col1 VARCHAR2(200).
@@ -522,6 +565,13 @@ VALUES(TO_CHAR(sysdate,'DD/MM/YY*HH24:MI*')
 || :NEW.EMP_NO || '*' || :NEW.APELLIDO||'* INSERCION ');
 END IF;
 END;
+
+
+
+
+
+
+
 
  
 #### 2.- Escribir un trigger de base de datos un que permita auditar las modificaciones en la tabla empleados insertado en la tabla auditaremple los siguientes datos:
@@ -583,6 +633,14 @@ INSERT INTO AUDITAREMPLE VALUES(v_cad_inser);
 END;
 
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 #### 3.- Escribir un disparador de base de datos que haga fallar cualquier operación de modificación del apellido o del número de un empleado, o que suponga una subida de sueldo superior al 10%.
  CREATE OR REPLACE TRIGGER fallo_modif
 BEFORE UPDATE OF apellido, emp_no, salario
@@ -597,6 +655,14 @@ RAISE_APPLICATION_ERROR
 (-20001,'Err. Modificacion no permitida');
 END IF;
 END;
+
+
+
+
+
+
+
+
 
 ## c) Ejemplos como crear un trigger a partir de una vista.
  #### 4.- Suponiendo que disponemos de la vista
@@ -631,6 +697,10 @@ RAISE_APPLICATION_ERROR
 END IF;
 END;
 
+ 
+ 
+ 
+ 
  
  
  
@@ -791,6 +861,14 @@ WHEN NO_DATA_FOUND THEN
 DBMS_OUTPUT.PUT_LINE('Err departamento no encontrado');
 END cambiar_localidad;
 END gest_depart;
+
+
+
+
+
+
+
+
 
 
 
@@ -1040,6 +1118,13 @@ END gest_emple;
 
 
 
+
+
+
+
+
+
+
   
 ## CREATE OR REPLACE PACKAGE...
 ## 3  .- Ejemplo de como crear un paquete.
@@ -1088,6 +1173,12 @@ Name Null? Type
 ------------------------------- -------- ----
 C1 CHAR(1)
 COMENTARIO VARCHAR2(20)
+
+
+
+
+
+
 
  
 #### 9.- Crear un procedimiento que permita consultar todos los datos de la tabla depart a partir de una condición que se indicará en la llamada al procedimiento.
@@ -1138,6 +1229,8 @@ END consultar_depart;
 
 
 
+
+
 ## ERRORES:
  
 DUP_VAL_ON_INDEX - Se produce cuando se intenta almacenar un valor ya existente en una columna que tiene restricción de índice único.
@@ -1169,6 +1262,9 @@ COLLECTION_IS_NULL - Se intentó asignar un valor a una tabla anidada aún no in
 SELF_IS_NULL - El parámetro SELF (el primero que es pasado a un método MEMBER) es nulo.
  
 OTHERS - Cualquier otro tipo de error que pueda producirse. Cuando se utiliza la excepción OTHERS, cualquier excepción que no se haya tratado anteriormente se procesará según la secuencia de instrucciones incluida dentro de la sección OTHERS. OTHERS debe ser la última excepción tratada dentro de la sección dedicada al tratamiento de excepciones.
+
+
+
 
 
 
