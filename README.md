@@ -1218,3 +1218,11 @@ Apartados de funcionamiento y otros datos importantes:
 
 Para ver el código de un procedimiento almacenado podemos hacer uso de la orden SQL:
 SHOW CREATE PROCEDURE department_getList;
+
+
+
+
+Examen PL/SQL:
+
+<img src="https://github.com/aelogonpin/PL-SQL/blob/main/Parte1.jpg">
+<img src="https://github.com/aelogonpin/PL-SQL/blob/main/Parte2.jpg">
