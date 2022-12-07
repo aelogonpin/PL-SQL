@@ -22,6 +22,7 @@ DBMS_OUTPUT.PUT_LINE( v_apellido||' * '||v_fecha); FETCH c_emple into v_apellido
 END LOOP;
 CLOSE c_emple; END ejercicio_uno; 
 
+<br><br><br><br>
 
 
  
@@ -39,6 +40,7 @@ END LOOP;
 CLOSE c_emple;
 END ver_emple_depart;
 
+<br><br><br><br>
 
 
 
@@ -62,7 +64,8 @@ DBMS_OUTPUT.PUT_LINE('NUMERO DE EMPLEADOS: '
 END ver_emple_apell;
  
  
- 
+ <br><br><br><br>
+
  
 #### 4)  Escribir un programa que visualice el apellido y el salario de los cinco empleados que tienen el salario más alto.
  Create or replace procedure ej3
@@ -79,6 +82,7 @@ end ej3;
 
 
 
+<br><br><br><br>
 
 
 
@@ -113,7 +117,8 @@ close c_emp;
 end ej4;
  
  
- 
+ <br><br><br><br>
+
  
  
  
@@ -182,6 +187,7 @@ END listar_emple;
 
 
 
+<br><br><br><br>
 
 
 #### 7)  Desarrollar un procedimiento que permita insertar nuevos departamentos según las siguientes especificaciones:
@@ -222,6 +228,7 @@ END insertar_depart;
 
 
 
+<br><br><br><br>
 
 
 
@@ -275,7 +282,8 @@ END alta_emp;
  
  
  
- 
+ <br><br><br><br>
+
  
  
  
@@ -318,7 +326,8 @@ END subida_sal1;
  
  
  
- 
+ <br><br><br><br>
+
  
  
 #### 10)  Escribir un procedimiento que suba el sueldo de todos los empleados que ganen menos que el salario medio de su oficio. La subida será de el 50% de la diferencia entre el salario del empleado y la media de su oficio. Se deberá asegurar que la transacción no se quede a medias, y se gestionarán los posibles errores.
@@ -376,6 +385,7 @@ END subida_50pct;
 
 
 
+<br><br><br><br>
 
 
 #### 11) Diseñar una aplicación que simule un listado de liquidación de los empleados según las siguientes especificaciones:
@@ -468,6 +478,7 @@ ORDER BY APELLIDO;
 
 
 
+<br><br><br><br>
 
 
 #### 12)  Crear la tabla T_liquidacion con las columnas apellido, departamento, oficio, salario, trienios, comp_responsabilidad, comisión y total; y modificar la aplicación anterior para que en lugar de realizar el listado directamente en pantalla, guarde los datos en la tabla. Se controlarán todas las posibles incidencias que puedan ocurrir durante el proceso.
@@ -535,7 +546,8 @@ END liquidar2;
  
  
  
- 
+ <br><br><br><br>
+
  
 ## 1.- Ejemplo de como crear un trigger.
 #### a) Construir un disparador de base de datos que permita auditar las operaciones de inserción o borrado de datos que se realicen en la tabla emple según las siguientes especificaciones:
@@ -567,6 +579,7 @@ END IF;
 END;
 
 
+<br><br><br><br>
 
 
 
@@ -636,7 +649,8 @@ END;
  
  
  
- 
+ <br><br><br><br>
+
  
  
  
@@ -660,6 +674,7 @@ END;
 
 
 
+<br><br><br><br>
 
 
 
@@ -698,7 +713,8 @@ END IF;
 END;
 
  
- 
+ <br><br><br><br>
+
  
  
  
@@ -866,6 +882,7 @@ END gest_depart;
 
 
 
+<br><br><br><br>
 
 
 
@@ -1122,6 +1139,7 @@ END gest_emple;
 
 
 
+<br><br><br><br>
 
 
 
@@ -1176,6 +1194,7 @@ COMENTARIO VARCHAR2(20)
 
 
 
+<br><br><br><br>
 
 
 
@@ -1224,7 +1243,7 @@ END consultar_depart;
 
 
 
-
+<br><br><br><br>
 
 
 
@@ -1265,6 +1284,7 @@ OTHERS - Cualquier otro tipo de error que pueda producirse. Cuando se utiliza la
 
 
 
+<br><br><br><br>
 
 
 
@@ -1278,6 +1298,7 @@ SHOW CREATE PROCEDURE department_getList;
 
 
 
+<br><br><br><br>
 
 
 
