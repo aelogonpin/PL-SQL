@@ -4,6 +4,15 @@ Todas las actividades de PL/SQL y posibles datos.
 
 
 
+
+
+
+
+
+En el caso de que querais ver el codigo mediante un sintaxis correcto pulsar en el boton raw pongo una captura del icono:
+
+
+
 ## PARTES DE ACTIVIDAD:
 
 
