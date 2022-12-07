@@ -4,136 +4,6 @@ Todas las actividades de PL/SQL y posibles datos.
 
 
 
-
-
-
-
-
-
-
-Partes de examen:
-
-1. Dada la vista EMPLEYDEPART formada por columnas de la Tabla EMPLE y LA TABLA
-DEPART, de la siguiente forma:
-Emp-no, apellido, oficio, dir, fecha-alt, salario y comisión DE LA TABLA EMPLE.
-Dnombre y loc DE LA TABLA DEPART.
-En la vista figuran todas las filas de EMPLE excepto las que tienen salario o comisión
-negativos.
-Se pide:
-a) Consulta que cree la vista. (0,25 ptos.).
-b) Realizar las acciones oportunas PLSQL cada vez que se intenta insertar en la vista,
-borrar o actualizar el campo Dnombre (Nombre del departamento). Contemple los
-casos que se intenten insertar filas cuyo Dnombre no existe en la BD o se intente
-actualizar el campo Dnombre con un nombre de Depto. que no existe en la BD.
-Asimismo, realizar también las acciones oportunas PLSQL para impedir inserciones o
-actualizaciones referidas a la vista, con salario o comisión superiores a 10000 y 50
-respectivamente. (2,75 ptos.).
-
-
-create view EMPLEYDEPART as
-  select EMPLE.EMP_NO, EMPLE.APELLIDO, EMPLE.OFICIO, EMPLE.DIR, EMPLE.FECHA_ALT, EMPLE.SALARIO, EMPLE.COMISION, DEPART.DNOMBRE, DEPART.LOC from EMPLE, DEPART
-  where EMPLE.DEPT_NO=DEPART.DEPT_NO
-  AND (EMPLE.SALARIO>=0 OR EMPLE.SALARIO IS NULL)
-  AND (EMPLE.COMISION>=0 OR EMPLE.COMISION IS NULL)
- 
-
-create or replace trigger INS_EMPLEYDEPART 
-instead of insert or update on EMPLEYDEPART 
-for each row 
-declare 
-  dep_rec DEPART.DEPT_NO%type; 
-  hayexcepcion EXCEPTION; 
-begin 
-    SELECT DEPT_NO INTO dep_rec FROM DEPART WHERE DNOMBRE=:new.DNOMBRE; 
-    if inserting then 
-        if (dep_rec IS NULL) OR (:new.SALARIO > 10000) OR (:new.COMISION > 50) then 
-          RAISE hayexcepcion; 
-        else 
-            insert into EMPLE VALUES (:new.EMP_NO,:new.APELLIDO,:new.OFICIO,:new.DIR,:new.FECHA_ALT,:new.SALARIO,:new.COMISION,dep_rec); 
-            insert into DEPART VALUES (dep_rec,:new.DNOMBRE,:new.LOC); 
-        end if; 
-    end if; 
-    if updating then 
-        if (dep_rec IS NULL) OR (:new.SALARIO > 10000) OR (:new.COMISION > 50) then 
-            RAISE hayexcepcion; 
-        else 
-            update EMPLE set APELLIDO=:new.APELLIDO, OFICIO=:new.OFICIO, DIR=:new.DIR, FECHA_ALT=:new.FECHA_ALT, SALARIO=:new.SALARIO, COMISION=:new.COMISION, DEPT_NO=dep_rec 
-            where EMP_NO=:new.EMP_NO; 
-            update DEPART set LOC=:new.LOC 
-            where DNOMBRE=:new.DNOMBRE; 
-        end if; 
-    end if; 
-    EXCEPTION 
-    WHEN hayexcepcion THEN 
-    dbms_output.put_line('Nom dep no existe o salario o comision no válidos');  
-end;
- 
- 
- 
- 
-Una Empresa de Telefonía está implementando un sistema de recepción de incidencias. Estas
-incidencias se recogerán desde un único número de asistencia telefónica y se almacenarán en una base de datos distribuida. Ésta tendrá 3 nodos Oracle. Se va a fragmentar una tabla llamada incidencias
-horizontalmente de tal manera que las provincias cuyo nombre comience por las letras desde la A a la C,
-en el nodo 0, de la D a la M en el nodo 1, y de la O a la Z en el nodo 2.
-Incidencia(Idincidencia, Fecha, cod-cliente, desc-incidenc, prov, estado-incidencia)
-1.- Diseñar en algebra relacional la fragmentación expresada en el párrafo anterior. Dibujar esquema de
-la BD distribuida.
- 
-1.
-NODO 0   
-INCIDENCIA_NODO0 = 𝜎prov>=’A’ AND prov<=’C’ (INCIDENCIA)
- 
-NODO 1   
-INCIDENCIA_NODO1 = 𝜎prov>=’D’ AND prov<=’M’ (INCIDENCIA)
- 
-NODO 2  
-INCIDENCIA_NODO2 = 𝜎prov>=’N’ AND prov<=’Z’ (INCIDENCIA)
- 
- 
- 
- 
- 
-Una Empresa está implementando un sistema de recepción de Pedidos. Los pedidos se
-recogerán desde un único número de asistencia telefónica, UN NODO, y se almacenarán en una base de datos distribuida. Ésta tendrá 4 nodos Oracle UBICADOS EN DISTINTOS LUGARES GEOGRÁFICOS. Se va a fragmentar una tabla llamada PEDIDOS, horizontalmente, de tal manera que las provincias cuyo nombre comience por las letras desde la A a la C, en el nodo 0, de la D a la M en el nodo 1, y de la O a la Z en el nodo 2; Y EN EL NODO 3 LOS DEL EXTRANJERO.
- 
-PEDIDOS(COD-PEDIDO, Fecha, cod-cliente, COD-ARTICULO, PROVINCIA, estado-
-incidencia, PAIS, CANTIDAD, PRECIO UNITARIO)
- 
- 
-1.- Diseñar en algebra relacional o sql la fragmentación expresada en el párrafo anterior. 
- 
-1.
-NODO 0   
-PEDIDOS_NODO0 = 𝜎prov>=’A’ AND prov<=’C’ AND pais=’ESPAÑA’ (PEDIDOS)
- 
-NODO 1   
-PEDIDOS_NODO1 = 𝜎prov>=’D’ AND prov<=’M’ AND pais=’ESPAÑA’ (PEDIDOS)
- 
-NODO 2  
-PEDIDOS_NODO2 = 𝜎prov>=’N’ AND prov<=’Z’ AND pais=’ESPAÑA’ (PEDIDOS)
- 
-NODO 3  
-PEDIDOS_NODO3 = 𝜎pais<>’ESPAÑA’ (PEDIDOS)
- 
- 
- 
- 
- 
- 
- 
- 
-
-2. Realizar un procedimiento que reciba como parámetro una cadena de caracteres que puede ser una consulta de tipo SELECT o UPDATE o INSERT o DELETE, sobre la tabla DEPART; y ejecute dicha consulta, teniendo en cuenta que si la consulta es SELECT deberá mostrar en pantalla las filas que resultan de dicha consulta (suponga que involucra a todos los campos de DEPART). Nota: La cadena no tiene espacios en blanco por la izquierda. (3,5 ptos.). 
-
-
-
-
-
-3. Diseñar una función que cree una TABLE PLSQL llamada t-emple con la misma estructura que las filas de la tabla EMPLE. Seguidamente cargue en una sola acción (de una sola vez) toda la tabla Emple en t-emple. A continuación, se deben de eliminar de t-emple todos los registros de empleados con comisión =0, muestre en pantalla los empleados que quedan y devuelva la suma de sus salarios (Return). (3,5 ptos.).
-
-
-
-
 PARTES DE ACTIVIDAD:
 1)  Desarrollar un procedimiento que visualice el apellido y la fecha de alta de todos los empleados ordenados por apellido.
 
@@ -148,7 +18,6 @@ FETCH c_emple into v_apellido, v_fecha; WHILE c_emple%FOUND LOOP
 DBMS_OUTPUT.PUT_LINE( v_apellido||' * '||v_fecha); FETCH c_emple into v_apellido,v_fecha;
 END LOOP;
 CLOSE c_emple; END ejercicio_uno;
-
  
 2)  Codificar un procedimiento que muestre el nombre de cada departamento y el número de empleados que tiene.
  
@@ -1341,3 +1210,11 @@ SELF_IS_NULL - El parámetro SELF (el primero que es pasado a un método MEMBER)
  
 OTHERS - Cualquier otro tipo de error que pueda producirse. Cuando se utiliza la excepción OTHERS, cualquier excepción que no se haya tratado anteriormente se procesará según la secuencia de instrucciones incluida dentro de la sección OTHERS. OTHERS debe ser la última excepción tratada dentro de la sección dedicada al tratamiento de excepciones.
 
+
+
+
+
+Apartados de funcionamiento y otros datos importantes:
+
+Para ver el código de un procedimiento almacenado podemos hacer uso de la orden SQL:
+SHOW CREATE PROCEDURE department_getList;
