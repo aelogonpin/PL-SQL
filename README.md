@@ -1323,3 +1323,11 @@ SHOW CREATE PROCEDURE department_getList;
 <br><br><br><br>
 
 <img src="https://github.com/aelogonpin/PL-SQL/blob/main/Parte2.jpg">
+
+
+
+
+
+
+Aportaciones de VIK:
+<embed src="3_ejers_bbdd_distr.pdf" type="application/pdf" width="100%" height="600px" />
