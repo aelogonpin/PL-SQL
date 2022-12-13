@@ -1330,10 +1330,4 @@ SHOW CREATE PROCEDURE department_getList;
 
 
 Aportaciones de VIK:
-  ---
- title: "Résumé"
- layout: pdf
- permalink: /resume/
- ---
-
-  <iframe src="https://github.com/aelogonpin/PL-SQL/blob/main/3_ejers_bbdd_distr.pdf" width="640" height="480"></iframe>
+[![Follow Mohamed El-Qassas GitHub](https://avatars.githubusercontent.com/u/49816567?s=96&v=4)](https://github.com/melqassas/)
