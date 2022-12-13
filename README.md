@@ -1324,10 +1324,3 @@ SHOW CREATE PROCEDURE department_getList;
 
 <img src="https://github.com/aelogonpin/PL-SQL/blob/main/Parte2.jpg">
 
-
-
-
-
-
-Aportaciones de VIK:
-[![Follow Mohamed El-Qassas GitHub](https://avatars.githubusercontent.com/u/49816567?s=96&v=4)](https://github.com/melqassas/)
