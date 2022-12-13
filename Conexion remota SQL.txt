@@ -1,0 +1,25 @@
+****Iniciar conexion remota Desde sqlplus en consola****
+
+create database link nombre_link  connect to system identified by system
+using '(description = (address = (protocol = TCP)(host = PC_DSILGUERO) 
+  (port= 1521)) (connect_data = (sid = ASIR)))';
+
+Luego para seleccionar una fila
+
+SELECT * FROM system.emple@nombre;
+
+DELETE from emple;
+
+INSERT INTO emple  (select * from system.emple@nombre);
+
+DROP table depart  cascade constraint;
+
+create table depart  as (select * from system.depart@nombre);
+
+*****************************************************************
+
+select * from emple natural join system.depart@nombre;
+
+SELECT * FROM DEPART UNION SELECT * FROM SYSTEM.DEPART@nombre;
+
+SELECT * FROM DEPART D, SYSTEM.EMPLE@nombre E WHERE D.COD_DEPART= E.COD_DEPART ORDER BY E.COD_DEPART;
