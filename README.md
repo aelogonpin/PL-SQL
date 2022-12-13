@@ -1330,4 +1330,10 @@ SHOW CREATE PROCEDURE department_getList;
 
 
 Aportaciones de VIK:
-<embed src="3_ejers_bbdd_distr.pdf" type="application/pdf" width="100%" height="600px" />
+  ---
+ title: "Résumé"
+ layout: pdf
+ permalink: /resume/
+ ---
+
+  <iframe src="https://github.com/aelogonpin/PL-SQL/blob/main/3_ejers_bbdd_distr.pdf" width="640" height="480"></iframe>
